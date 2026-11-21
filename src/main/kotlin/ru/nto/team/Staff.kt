@@ -1,4 +1,20 @@
 package ru.nto.team
 
-// TODO: connect this class to staff using JPA; id is generated, code is unique.
-class Staff(var id: Long = 0, var code: String = "", var fullName: String = "")
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.Table
+
+@Entity
+@Table(name = "staff")
+class Staff(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0,
+    @Column(name = "code", nullable = false, unique = true, length = 4)
+    var code: String = "",
+    @Column(name = "full_name", nullable = false, length = 150)
+    var fullName: String = ""
+)
